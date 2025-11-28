@@ -20,6 +20,6 @@ jobs:
     name: E2E & Visual Tests
     # This job will only start AFTER the unit_and_component job succeeds
     needs: [unit_and_component]
-    uses: ./github/workflows/test_e2e.yml
+    uses: ./.github/workflows/test_e2e.yml
     # Pass secrets if needed
     # secrets: inherit
