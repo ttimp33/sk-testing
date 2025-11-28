@@ -1,0 +1,27 @@
+# .github/workflows/test_unit_component.yml
+name: Reusable Unit & Component Tests
+
+on: 
+  # Allows this workflow to be called on other workflows
+  workflow_call:
+    secrets:
+      NPM_TOKEN: 
+        required: false
+
+jobs:
+  vitest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+            node-version: lts/*
+            cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Vitest (Unit & Component Tests)
+        run: npm run test:unit
+        # This will fail fast if any core logic or component assertions fail

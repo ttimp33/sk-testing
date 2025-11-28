@@ -1,0 +1,25 @@
+# .github/workflows/ci.yml
+name: Main CI Pipeline
+
+on: 
+  push: 
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+
+jobs:
+  # 1. Job to run Unit and Component Tests
+  unit_and_component:
+    name: Unit & Component Tests
+    uses: ./.github/workflows/test_unit_component.yml
+    # Pass secrets if needed
+    # secrets: inherit
+
+  # 2. Job to run E2E and Visual Reqression (if configured) Tests
+  e2e_and_visual:
+    name: E2E & Visual Tests
+    # This job will only start AFTER the unit_and_component job succeeds
+    needs: [unit_and_component]
+    uses: ./github/workflows/test_e2e.yml
+    # Pass secrets if needed
+    # secrets: inherit
