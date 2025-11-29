@@ -30,3 +30,6 @@ jobs:
     # This job will only start AFTER the e2e_and_visual job succeeds
     needs: [e2e_and_visual]
     uses: ./.github/workflows/build_docker.yml
+    secrets: 
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

@@ -5,8 +5,10 @@ name: Docker Build & Push
 on:
   workflow_call:
     secrets:
-      NPM_TOKEN: 
-        required: false
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_TOKEN:
+        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
