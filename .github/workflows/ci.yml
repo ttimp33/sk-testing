@@ -23,3 +23,10 @@ jobs:
     uses: ./.github/workflows/test_e2e.yml
     # Pass secrets if needed
     # secrets: inherit
+  
+  # 3. Job to build & containerize application
+  build_docker:
+    name: Build Docker Image
+    # This job will only start AFTER the e2e_and_visual job succeeds
+    needs: [e2e_and_visual]
+    uses: ./.github/workflow/build_docker.yml
