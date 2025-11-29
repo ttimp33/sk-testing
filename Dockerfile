@@ -4,7 +4,7 @@ WORKDIR /app
 
 # 1) install deps (uses package-lock for reproducible builds)
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci
 
 # 2) copy source
 COPY . .
@@ -14,6 +14,8 @@ RUN npm run build && npm prune --omit=dev
 
 # --- runtime stage ---
 FROM node:20-slim AS runtime
+ENV NODE_ENV production
+
 WORKDIR /app
 
 # 4) copy the built server bundle and package files
